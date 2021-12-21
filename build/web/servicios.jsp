@@ -53,7 +53,7 @@
                         <span class="material-icons-sharp">
                             add
                         </span>
-                        <h3>Agregar<br>servicio</h3>
+                        <h3>Agregar<br>Servicio</h3>
                     </a>
                 </section>
                 <section>

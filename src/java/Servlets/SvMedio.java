@@ -28,13 +28,27 @@ public class SvMedio extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
+        
+        if (action.equals("DELETE")){
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+            boolean eliminado = control.eliminarMedio(id);
+            request.getSession().setAttribute("listaMedios", control.traerMedios());
+            
+            if (eliminado) {
+                response.sendRedirect("medios.jsp?eliminado=true");
+            } else {
+                response.sendRedirect("medios.jsp?eliminado=false");
+            }
 
-        if (action.equals("UPDATE")) {
+            
+        } else if (action.equals("UPDATE")) {
             int id = Integer.parseInt(request.getParameter("id"));
             String nombre = request.getParameter("name");
             int comision = Integer.parseInt(request.getParameter("interest"));
 
             boolean actualizado = control.updateMedio(id, nombre, comision);
+            request.getSession().setAttribute("listaMedios", control.traerMedios());
 
             if (actualizado) {
                 response.sendRedirect("medios.jsp?actualizado=true");
@@ -48,6 +62,7 @@ public class SvMedio extends HttpServlet {
             int comision = Integer.parseInt(request.getParameter("interest"));
 
             boolean creado = control.crearMedio(nombre, comision);
+            request.getSession().setAttribute("listaMedios", control.traerMedios());
 
             if (creado) {
                 response.sendRedirect("medios.jsp?creado=true");

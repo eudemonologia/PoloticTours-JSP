@@ -18,6 +18,7 @@ import Logica.Venta;
 import Persistencia.exceptions.NonexistentEntityException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -27,6 +28,10 @@ public class PaqueteJpaController implements Serializable {
 
     public PaqueteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+    
+    public PaqueteJpaController(){
+        emf = Persistence.createEntityManagerFactory("TPFINAL-PU");
     }
     private EntityManagerFactory emf = null;
 

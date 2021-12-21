@@ -1,6 +1,5 @@
 <%@page import="Logica.MedioPago" %>
 <%@page import="java.util.List" %>
-<%@page import="Logica.Controladora" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% HttpSession miSesion = request.getSession();
@@ -9,8 +8,7 @@
                         } %>
 
 <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Controladora control = new Controladora();
-    List<MedioPago> listaMedios = control.traerMedios();
+    List<MedioPago> listaMedios = (List) request.getSession().getAttribute("listaMedios");
 %>
 
 <!DOCTYPE html>
@@ -87,7 +85,7 @@
                         <span class="material-icons-sharp">
                             add
                         </span>
-                        <h3>Agregar<br>medio de pago</h3>
+                        <h3>Agregar<br>Medio de pago</h3>
                     </a>
                 </section>
                 <section>
@@ -117,16 +115,20 @@
                                 <td>?</td>
                                 <td>?</td>
                                 <td>
-                                    <a href="medio.jsp?id=<%= medio.getCodigo()%>">
+                                    <a href="medio.jsp?id=<%= medio.getCodigo()%>" onclick="return confirm('¿Está seguro que desea editar este medio de pago?')">
                                         <span class="material-icons-sharp">
                                             edit
                                         </span>
                                     </a>
-                                    <a href="eliminar-empleado.jsp?id=<%= medio.getCodigo()%>">
-                                        <span class="material-icons-sharp">
-                                            delete
-                                        </span>
-                                    </a>
+                                    <form action="SvMedio" method="POST" onsubmit="return confirm('¿Está seguro que desea eliminar el medio de pago?')">
+                                        <input type="hidden" name="id" value="<%= medio.getCodigo()%>">
+                                        <input type="hidden" name="action" value="DELETE">
+                                        <button type="submit">
+                                            <span class="material-icons-sharp">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             <% } %>

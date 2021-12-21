@@ -4,7 +4,6 @@
 <%@page import="java.util.Date" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="java.util.List" %>
-<%@page import="Logica.Controladora" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 
@@ -15,11 +14,10 @@
 
 <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Date ahora = new Date();
-    Controladora control = new Controladora();
-    List<Venta> listaVentas = control.traerVentas();
-    List<Empleado> listaEmpleados = control.traerEmpleados();
-                                        List<Cliente> listaClientes = control.traerClientes();
-                                       %>
+    List<Venta> listaVentas = (List) request.getSession().getAttribute("listaVentas");
+    List<Empleado> listaEmpleados = (List) request.getSession().getAttribute("listaEmpleados");
+    List<Cliente> listaClientes = (List) request.getSession().getAttribute("listaClientes");
+%>
 <!DOCTYPE html>
 <html>
 
@@ -65,7 +63,13 @@
                         </span>
                         <div class="data">
                             <h3>Ventas<br>Totales</h3>
-                            <h4>123</h4>
+                            <h4>
+                                <% if (listaVentas != null) {
+                                                                                        out.print(listaVentas.size());
+                                                                                    } else {
+                                                                                        out.print("0");
+                                                                                    } %>
+                            </h4>
                         </div>
                         <small>Desde el inicio de actividades.</small>
                     </div>
@@ -75,7 +79,17 @@
                         </span>
                         <div class="data">
                             <h3>Ganancias<br>Totales</h3>
-                            <h4>$25.000</h4>
+                            <h4>
+                                $<% if (listaVentas != null) {
+                                                                                        double total = 0;
+                                                                                        for (Venta v : listaVentas) {
+                                                                                            total += v.getCosto();
+                                                                                        }
+                                                                                        out.print(String.format("%.2f", total));
+                                                                                    } else {
+                                                                                        out.print("0,00");
+                                                                                    }%>
+                            </h4>
                         </div>
                         <small>Desde el inicio de actividades.</small>
                     </div>

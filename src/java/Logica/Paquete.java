@@ -61,6 +61,10 @@ public class Paquete implements Serializable {
     public void setListaServicios(List<Servicio> listaServicios) {
         this.listaServicios = listaServicios;
     }
+    
+    public void addListaServicios(Servicio servicio){
+        this.listaServicios.add(servicio);
+    }
 
     public void setListaVentas(List<Venta> listaVentas) {
         this.listaVentas = listaVentas;

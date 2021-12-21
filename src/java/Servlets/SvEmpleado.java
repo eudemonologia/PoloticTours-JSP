@@ -36,7 +36,10 @@ public class SvEmpleado extends HttpServlet {
         if (action.equals("DELETE")) {
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
+                
                 boolean eliminado = control.eliminarEmpleado(id);
+                request.getSession().setAttribute("listaEmpleados", control.traerEmpleados());
+                
                 if (eliminado) {
                     response.sendRedirect("empleados.jsp?eliminado=true");
                 } else {
@@ -68,6 +71,7 @@ public class SvEmpleado extends HttpServlet {
                 String password = request.getParameter("password");
                 
                 boolean actualizado = control.updateEmpleado(id, nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac, fechaContratacion, cargo, sueldo, password);
+                request.getSession().setAttribute("listaEmpleados", control.traerEmpleados());
                 
                 if (actualizado) {
                     response.sendRedirect("empleados.jsp?actualizado=true");
@@ -102,6 +106,8 @@ public class SvEmpleado extends HttpServlet {
                 String password = request.getParameter("password");
 
                 control.crearEmpleado(nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac, fechaContratacion, cargo, sueldo, password);
+                request.getSession().setAttribute("listaEmpleados", control.traerEmpleados());
+                
                 response.sendRedirect("empleados.jsp");
             } catch (ParseException ex) {
                 Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);

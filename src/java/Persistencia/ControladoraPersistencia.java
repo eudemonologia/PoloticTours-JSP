@@ -3,6 +3,8 @@ package Persistencia;
 import Logica.Cliente;
 import Logica.Empleado;
 import Logica.MedioPago;
+import Logica.Paquete;
+import Logica.Servicio;
 import Logica.Usuario;
 import Logica.Venta;
 import Persistencia.exceptions.NonexistentEntityException;
@@ -17,6 +19,8 @@ public class ControladoraPersistencia {
     ClienteJpaController clienteJPA = new ClienteJpaController();
     MedioPagoJpaController medioJPA = new MedioPagoJpaController();
     VentaJpaController ventaJPA = new VentaJpaController();
+    ServicioJpaController serviJPA = new ServicioJpaController();
+    PaqueteJpaController paqueJPA = new PaqueteJpaController();
 
     public void crearEmpleado(Empleado emple, Usuario usu) {
         usuJPA.create(usu);
@@ -120,4 +124,24 @@ public class ControladoraPersistencia {
         return actualizado;
     }
 
+    public boolean eliminarMedio(int id) {
+        boolean eliminado = false;
+        try {
+            medioJPA.destroy(id);
+            eliminado = true;
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return eliminado;
+    }
+    
+    public Servicio traerServicio(int id){
+        return serviJPA.findServicio(id);
+    }
+    
+    public boolean crearServicio(Servicio servi, Paquete paque){
+        serviJPA.create(servi);
+        paqueJPA.create(paque);
+        return true;
+    }
 }

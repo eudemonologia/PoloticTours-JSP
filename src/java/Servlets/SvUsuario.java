@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Logica.Controladora;
@@ -17,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
 public class SvUsuario extends HttpServlet {
-    
+
     Controladora control = new Controladora();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -25,7 +20,6 @@ public class SvUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,17 +30,16 @@ public class SvUsuario extends HttpServlet {
         response.sendRedirect("login.jsp");
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        
+
         boolean autorizado = control.conectarUsuario(email, password);
-        
+
         if (autorizado) {
             Empleado emple = control.traerEmpleadoByEmail(email);
             HttpSession miSesion = request.getSession(true);
@@ -54,6 +47,11 @@ public class SvUsuario extends HttpServlet {
             miSesion.setAttribute("nombre", emple.getNombre());
             miSesion.setAttribute("apellido", emple.getApellido());
             miSesion.setAttribute("password", password);
+
+            miSesion.setAttribute("listaVentas", control.traerVentas());
+            miSesion.setAttribute("listaEmpleados", control.traerEmpleados());
+            miSesion.setAttribute("listaClientes", control.traerClientes());
+            miSesion.setAttribute("listaMedios", control.traerMedios());
             response.sendRedirect("index.jsp");
 
         } else {
@@ -68,12 +66,9 @@ public class SvUsuario extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response); 
+        processRequest(request, response);
     }
-    
-    
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";

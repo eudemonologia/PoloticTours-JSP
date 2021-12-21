@@ -86,7 +86,9 @@ public class Servicio implements Serializable {
         this.listaPaquetes = listaPaquetes;
     }
     
-    
+    public void addListaPaquetes(Paquete paquete){
+        this.listaPaquetes.add(paquete);
+    }
     
     
 }

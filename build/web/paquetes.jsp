@@ -21,30 +21,30 @@
             <section class="insights">
                 <div class="card">
                     <span class="material-icons-sharp">
-                        self_improvement
+                        format_list_bulleted
                     </span>
                     <div class="data">
-                        <h3>Empleados Totales</h3>
+                        <h3>Paquetes<br>Totales</h3>
                         <h4>123</h4>
                     </div>
                     <small>Desde el inicio de actividades.</small>
                 </div>
                 <div class="card">
                     <span class="material-icons-sharp">
-                        person_add
+                        shopping_basket
                     </span>
                     <div class="data">
-                        <h3>Nuevos Clientes</h3>
+                        <h3>Paquete<br>Más grande</h3>
                         <h4>12</h4>
                     </div>
                     <small>Las últimos 30 días.</small>
                 </div>
                 <div class="card">
                     <span class="material-icons-sharp">
-                        person_add
+                        percent
                     </span>
                     <div class="data">
-                        <h3>Nuevos Clientes</h3>
+                        <h3>Descuento<br>Mayor</h3>
                         <h4>12</h4>
                     </div>
                     <small>Las últimos 30 días.</small>
@@ -53,7 +53,7 @@
                     <span class="material-icons-sharp">
                         add
                     </span>
-                    <h3>Agregar<br>paquete</h3>
+                    <h3>Agregar<br>Paquete</h3>
                 </a>
             </section>
             <section>

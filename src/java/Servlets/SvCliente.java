@@ -35,7 +35,9 @@ public class SvCliente extends HttpServlet {
         String action = request.getParameter("action");
         if (action.equals("DELETE")){
             int id = Integer.parseInt(request.getParameter("id"));
+            
             boolean eliminado = control.eliminarCliente(id);
+            request.getSession().setAttribute("listaClientes", control.traerClientes());
             
             if (eliminado) {
                     response.sendRedirect("clientes.jsp?eliminado=true");
@@ -57,6 +59,7 @@ public class SvCliente extends HttpServlet {
                 Date fechaNac = format.parse(request.getParameter("birthdate"));
                 
                 boolean actualizado = control.updateCliente(id, nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac);
+                request.getSession().setAttribute("listaClientes", control.traerClientes());
                 
                 if (actualizado) {
                     response.sendRedirect("clientes.jsp?actualizado=true");
@@ -83,6 +86,8 @@ public class SvCliente extends HttpServlet {
                 Date fechaNac = format.parse(request.getParameter("birthdate"));
 
                 control.crearCliente(nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac);
+                request.getSession().setAttribute("listaClientes", control.traerClientes());
+                
                 response.sendRedirect("clientes.jsp");
             } catch (ParseException ex) {
                 Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
