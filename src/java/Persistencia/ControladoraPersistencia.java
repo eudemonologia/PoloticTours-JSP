@@ -4,16 +4,19 @@ import Logica.Cliente;
 import Logica.Empleado;
 import Logica.MedioPago;
 import Logica.Usuario;
+import Logica.Venta;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ControladoraPersistencia {
+
     EmpleadoJpaController empleJPA = new EmpleadoJpaController();
     UsuarioJpaController usuJPA = new UsuarioJpaController();
     ClienteJpaController clienteJPA = new ClienteJpaController();
     MedioPagoJpaController medioJPA = new MedioPagoJpaController();
+    VentaJpaController ventaJPA = new VentaJpaController();
 
     public void crearEmpleado(Empleado emple, Usuario usu) {
         usuJPA.create(usu);
@@ -33,7 +36,7 @@ public class ControladoraPersistencia {
     }
 
     public List<Cliente> traerClientes() {
-        return  clienteJPA.findClienteEntities();
+        return clienteJPA.findClienteEntities();
     }
 
     public Cliente traerCliente(int id) {
@@ -41,14 +44,14 @@ public class ControladoraPersistencia {
     }
 
     public boolean eliminarEmpleado(int id) throws NonexistentEntityException {
-            empleJPA.destroy(id);
-            return true;
+        empleJPA.destroy(id);
+        return true;
     }
 
     public boolean eliminarUsuario(int id) throws NonexistentEntityException {
 
-            usuJPA.destroy(id);
-            return true;
+        usuJPA.destroy(id);
+        return true;
     }
 
     public void crearCliente(Cliente cliente) {
@@ -60,15 +63,61 @@ public class ControladoraPersistencia {
     }
 
     public boolean updateEmpleado(Empleado emple, Usuario usu) {
+        boolean actualizado = false;
         try {
             usuJPA.edit(usu);
             empleJPA.edit(emple);
-            return true;
+            actualizado = true;
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return false;
         }
+        return actualizado;
     }
-    
+
+    public List<Venta> traerVentas() {
+        return ventaJPA.findVentaEntities();
+    }
+
+    public boolean updateCliente(Cliente cliente) {
+        boolean actualizado = false;
+        try {
+            clienteJPA.edit(cliente);
+            actualizado = true;
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return actualizado;
+    }
+
+    public boolean eliminarCliente(int id) {
+        boolean eliminado = false;
+        try {
+            clienteJPA.destroy(id);
+            eliminado = true;
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return eliminado;
+    }
+
+    public MedioPago traerMedio(int id) {
+        return medioJPA.findMedioPago(id);
+    }
+
+    public boolean crearMedio(MedioPago medio) {
+        medioJPA.create(medio);
+        return true;
+    }
+
+    public boolean updateMedio(MedioPago medio) {
+        boolean actualizado = false;
+        try {
+            medioJPA.edit(medio);
+            actualizado = true;
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return actualizado;
+    }
+
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import Logica.Controladora;
@@ -22,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SvCliente extends HttpServlet {
 
     Controladora control = new Controladora();
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,24 +32,61 @@ public class SvCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        try {
-            String nombre = request.getParameter("name");
-            String apellido = request.getParameter("lastname");
-            String dni = request.getParameter("dni");
-            String email = request.getParameter("email");
-            String celular = request.getParameter("phone");
-            String direccion = request.getParameter("address");
-            String nacionalidad = request.getParameter("nationality");
+        String action = request.getParameter("action");
+        if (action.equals("DELETE")){
+            int id = Integer.parseInt(request.getParameter("id"));
+            boolean eliminado = control.eliminarCliente(id);
+            
+            if (eliminado) {
+                    response.sendRedirect("clientes.jsp?eliminado=true");
+                } else {
+                    response.sendRedirect("clientes.jsp?eliminado=false");
+                }
+        } else if (action.equals("UPDATE")) {
+                            
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                String nombre = request.getParameter("name");
+                String apellido = request.getParameter("lastname");
+                String dni = request.getParameter("dni");
+                String email = request.getParameter("email");
+                String celular = request.getParameter("phone");
+                String direccion = request.getParameter("address");
+                String nacionalidad = request.getParameter("nationality");
+                
+                Date fechaNac = format.parse(request.getParameter("birthdate"));
+                
+                boolean actualizado = control.updateCliente(id, nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac);
+                
+                if (actualizado) {
+                    response.sendRedirect("clientes.jsp?actualizado=true");
+                } else {
+                    response.sendRedirect("clientes.jsp?actualizado=false");
+                }
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(SvCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            
+        } else {
+            try {
+                String nombre = request.getParameter("name");
+                String apellido = request.getParameter("lastname");
+                String dni = request.getParameter("dni");
+                String email = request.getParameter("email");
+                String celular = request.getParameter("phone");
+                String direccion = request.getParameter("address");
+                String nacionalidad = request.getParameter("nationality");
 
-            Date fechaNac = format.parse(request.getParameter("birthdate"));
 
-            control.crearCliente(nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac);
-            response.sendRedirect("clientes.jsp");
-        } catch (ParseException ex) {
-            Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                Date fechaNac = format.parse(request.getParameter("birthdate"));
+
+                control.crearCliente(nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac);
+                response.sendRedirect("clientes.jsp");
+            } catch (ParseException ex) {
+                Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

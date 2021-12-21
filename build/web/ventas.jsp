@@ -50,7 +50,7 @@
                         </div>
                         <small>Las últimos 30 días.</small>
                     </div>
-                    <a class="border-card" href="ventas.jsp">
+                    <a class="border-card" href="venta.jsp">
                         <span class="material-icons-sharp">
                             add
                         </span>

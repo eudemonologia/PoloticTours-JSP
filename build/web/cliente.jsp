@@ -1,17 +1,18 @@
+<%@page import="java.text.SimpleDateFormat" %>
 <%@page import="Logica.Controladora" %>
 <%@page import="Logica.Cliente" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% HttpSession miSesion = request.getSession();
-                if (miSesion.getAttribute("usuario") == null) {
-                    response.sendRedirect("login.jsp");
-                } %>
+                    if (miSesion.getAttribute("usuario") == null) {
+                        response.sendRedirect("login.jsp");
+                    } %>
 <% String id = request.getParameter("id");
-                    String nombre = request.getParameter("name");
-                    Cliente cliente = null;
-                    if (id != null && nombre != null) {
-                        Controladora control = new Controladora();
-                        cliente = control.traerCliente(Integer.parseInt(id));
-                    }%>
+                        Cliente cliente = null;
+                        if (id != null) {
+                            Controladora control = new Controladora();
+                            cliente = control.traerCliente(Integer.parseInt(id));
+                        }%>
+<% SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");%>
 <!DOCTYPE html>
 <html>
 
@@ -23,15 +24,15 @@
     <body>
         <div class="container">
             <%@include file="./COMPONENTS/Nav.jsp" %>
-            <main class="empleado">
+            <main class="cliente">
                 <h2>
                     <% if (id != null) {%>
                     <%= cliente.getNombre()%>
-                    <%=cliente.getApellido()%>
-                    <% } else { %> Empleados <% } %>
+                    <%= cliente.getApellido()%>
+                    <% } else { %> Nuevo Cliente <% } %>
                 </h2>
                 <section class="card">
-                    <form class="form colums2" action="SvCliente" method="POST" >
+                    <form class="form colums2" action="SvCliente" method="POST">
                         <div class="field">
                             <label for="name">Nombre</label>
                             <input type="text" name="name" id="name" <% if (id != null) {%> value="<%=cliente.getNombre()%>" <% } %> required>
@@ -62,8 +63,12 @@
                         </div>
                         <div class="field">
                             <label for="birthdate">Fecha de nacimiento</label>
-                            <input type="date" name="birthdate" id="birthdate" required>
+                            <input type="date" name="birthdate" id="birthdate" <% if (id != null) {%> value="<%=format.format(cliente.getFechaNac())%>" <% }%> required>
                         </div>
+                        <% if (id != null) {%>
+                        <input type="hidden" name="id" value="<%=cliente.getId()%>">
+                        <% } %>
+                        <input type="hidden" name="action" value="<% if (id != null) {%>UPDATE<% } else { %>CREATE<% }%>">
                         <button type="submit">
                             <span class="material-icons-sharp">
                                 save

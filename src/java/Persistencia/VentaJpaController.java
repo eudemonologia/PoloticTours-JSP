@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -26,6 +27,10 @@ public class VentaJpaController implements Serializable {
 
     public VentaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+
+    public VentaJpaController() {
+        emf = Persistence.createEntityManagerFactory("TPFINAL-PU");
     }
     private EntityManagerFactory emf = null;
 
@@ -176,5 +181,5 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

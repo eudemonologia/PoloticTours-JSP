@@ -21,33 +21,33 @@
                 <section class="insights">
                     <div class="card">
                         <span class="material-icons-sharp">
-                            self_improvement
+                            format_list_bulleted
                         </span>
                         <div class="data">
-                            <h3>Empleados Totales</h3>
+                            <h3>Servicios<br>Totales</h3>
                             <h4>123</h4>
                         </div>
                         <small>Desde el inicio de actividades.</small>
                     </div>
                     <div class="card">
                         <span class="material-icons-sharp">
-                            person_add
+                            expand_more
                         </span>
                         <div class="data">
-                            <h3>Nuevos Clientes</h3>
+                            <h3>Servicios<br>Pasados</h3>
                             <h4>12</h4>
                         </div>
-                        <small>Las últimos 30 días.</small>
+                        <small>Desde el inicio de actividades.</small>
                     </div>
                     <div class="card">
                         <span class="material-icons-sharp">
-                            person_add
+                            expand_less
                         </span>
                         <div class="data">
-                            <h3>Nuevos Clientes</h3>
+                            <h3>Servicios<br>Futuros</h3>
                             <h4>12</h4>
                         </div>
-                        <small>Las últimos 30 días.</small>
+                        <small>Desde el inicio de actividades.</small>
                     </div>
                     <a class="border-card" href="servicio.jsp">
                         <span class="material-icons-sharp">

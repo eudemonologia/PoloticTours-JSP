@@ -1,14 +1,16 @@
+<%@page import="java.util.Date" %>
 <%@page import="Logica.Cliente" %>
 <%@page import="java.util.List" %>
 <%@page import="Logica.Controladora" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% HttpSession miSesion = request.getSession();
-                        if (miSesion.getAttribute("usuario") == null) {
-                            response.sendRedirect("login.jsp");
-                        } %>
+                            if (miSesion.getAttribute("usuario") == null) {
+                                response.sendRedirect("login.jsp");
+                            } %>
 
 <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    Date ahora = new Date();
     Controladora control = new Controladora();
     List<Cliente> listaClientes = control.traerClientes();
 %>
@@ -31,8 +33,10 @@
                             self_improvement
                         </span>
                         <div class="data">
-                            <h3>Empleados Totales</h3>
-                            <h4>123</h4>
+                            <h3>Clientes<br>Totales</h3>
+                            <h4>
+                                <%= listaClientes.size()%>
+                            </h4>
                         </div>
                         <small>Desde el inicio de actividades.</small>
                     </div>
@@ -41,18 +45,20 @@
                             person_add
                         </span>
                         <div class="data">
-                            <h3>Nuevos Clientes</h3>
-                            <h4>12</h4>
+                            <h3>Clientes<br>Activos</h3>
+                            <h4>0</h4>
                         </div>
-                        <small>Las últimos 30 días.</small>
+                        <small>El último mes del corriente año.</small>
                     </div>
                     <div class="card">
                         <span class="material-icons-sharp">
-                            person_add
+                            monetization_on
                         </span>
                         <div class="data">
-                            <h3>Nuevos Clientes</h3>
-                            <h4>12</h4>
+                            <h3>Compras<br>Totales</h3>
+                            <h4>
+                                $<%= String.format("%.2f", 0.0)%>
+                            </h4>
                         </div>
                         <small>Las últimos 30 días.</small>
                     </div>
@@ -70,6 +76,7 @@
                                 <th>Codigo</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
+                                <th>Edad</th>
                                 <th>Nacionalidad</th>
                                 <th>Compras</th>
                                 <th>Promedio</th>
@@ -87,6 +94,9 @@
                                 </td>
                                 <td>
                                     <%= cliente.getApellido()%>
+                                </td>
+                                <td>
+                                    <%= ahora.getYear() - cliente.getFechaNac().getYear()%>
                                 </td>
                                 <td>
                                     <%= cliente.getNacionalidad()%>
@@ -108,16 +118,20 @@
                                             email
                                         </span>
                                     </a>
-                                    <a href="editar-empleado.jsp?id=<%= cliente.getId()%>&name=<%= cliente.getNombre()%>">
+                                    <a href="./cliente.jsp?id=<%= cliente.getId()%>" onclick="return confirm('¿Está seguro que desea editar este Cliente?')">
                                         <span class="material-icons-sharp">
                                             edit
                                         </span>
                                     </a>
-                                    <a href="eliminar-empleado.jsp?id=<%= cliente.getId()%>">
-                                        <span class="material-icons-sharp">
-                                            delete
-                                        </span>
-                                    </a>
+                                    <form action="SvCliente" method="POST" onsubmit="return confirm('¿Está seguro que desea eliminar este Cliente?')">
+                                        <input type="hidden" name="id" value="<%= cliente.getId()%>">
+                                        <input type="hidden" name="action" value="DELETE">
+                                        <button type="submit">
+                                            <span class="material-icons-sharp">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             <% }%>
@@ -128,5 +142,19 @@
             </main>
         </div>
     </body>
+
+    <script>
+        <% if (request.getParameter("eliminado") != null && request.getParameter("eliminado").equals("true")) { %>
+                                    alert("Cliente eliminado correctamente");
+        <% } else if (request.getParameter("eliminado") != null && request.getParameter("eliminado").equals("false")) { %>
+                                    alert("No se pudo eliminar el cliente");
+        <% }%>
+
+        <% if (request.getParameter("actualizado") != null && request.getParameter("actualizado").equals("true")) { %>
+                                    alert("Cliente editado correctamente");
+        <% } else if (request.getParameter("actualizado") != null && request.getParameter("actualizado").equals("false")) { %>
+                                    alert("No se pudo editar el cliente");
+        <% }%>
+    </script>
 
 </html>
