@@ -8,14 +8,14 @@
 
 
 <% HttpSession miSesion = request.getSession();
-                                if (miSesion.getAttribute("usuario") == null) {
-                                    response.sendRedirect("login.jsp");
-                                } else {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Date ahora = new Date();
-    List<Venta> listaVentas = (List) request.getSession().getAttribute("listaVentas");
-    List<Empleado> listaEmpleados = (List) request.getSession().getAttribute("listaEmpleados");
-    List<Cliente> listaClientes = (List) request.getSession().getAttribute("listaClientes");
+    if (miSesion.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    } else {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date ahora = new Date();
+        List<Venta> listaVentas = (List) request.getSession().getAttribute("listaVentas");
+        List<Empleado> listaEmpleados = (List) request.getSession().getAttribute("listaEmpleados");
+        List<Cliente> listaClientes = (List) request.getSession().getAttribute("listaClientes");
 %>
 <!DOCTYPE html>
 <html>
@@ -64,10 +64,10 @@
                             <h3>Ventas<br>Totales</h3>
                             <h4>
                                 <% if (listaVentas != null) {
-                                                                                    out.print(listaVentas.size());
-                                                                                } else {
-                                                                                    out.print("0");
-                                                                                } %>
+                                        out.print(listaVentas.size());
+                                    } else {
+                                        out.print("0");
+                                    } %>
                             </h4>
                         </div>
                         <small>Desde el inicio de actividades.</small>
@@ -80,14 +80,14 @@
                             <h3>Ganancias<br>Totales</h3>
                             <h4>
                                 $<% if (listaVentas != null) {
-                                                                                    double total = 0;
-                                                                                    for (Venta v : listaVentas) {
-                                                                                        total += v.getCosto();
-                                                                                    }
-                                                                                    out.print(String.format("%.2f", total));
-                                                                                } else {
-                                                                                    out.print("0,00");
-                                                                                }%>
+                                        double total = 0;
+                                        for (Venta v : listaVentas) {
+                                            total += v.getCosto();
+                                        }
+                                        out.print(String.format("%.2f", total));
+                                    } else {
+                                        out.print("0,00");
+                                    }%>
                             </h4>
                         </div>
                         <small>Desde el inicio de actividades.</small>
@@ -125,4 +125,4 @@
 
 </html>
 
-<%} %>
+<%}%>

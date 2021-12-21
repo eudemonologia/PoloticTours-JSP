@@ -3,11 +3,11 @@
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% HttpSession miSesion = request.getSession();
-                        if (miSesion.getAttribute("usuario") == null) {
-                            response.sendRedirect("login.jsp");
-                        } else {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    List<MedioPago> listaMedios = (List) request.getSession().getAttribute("listaMedios");
+    if (miSesion.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    } else {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<MedioPago> listaMedios = (List) request.getSession().getAttribute("listaMedios");
 %>
 
 <!DOCTYPE html>
@@ -67,12 +67,12 @@
                             <h3>Comisión<br>Menor</h3>
                             <h4>
                                 <% if (listaMedios.size() > 0) {
-                                                                    int menor = 1000;
-                                                                    for (MedioPago medio : listaMedios) {
-                                                                        if (medio.getComision() < menor) {
-                                                                            menor = medio.getComision();
-                                                                        }
-                                                                    }%>
+                                        int menor = 1000;
+                                        for (MedioPago medio : listaMedios) {
+                                            if (medio.getComision() < menor) {
+                                                menor = medio.getComision();
+                                            }
+                                        }%>
                                 <%= menor%>%
                                 <% } else { %>
                                 0
@@ -142,24 +142,24 @@
 
     <script>
         <% if (request.getParameter("eliminado") != null && request.getParameter("eliminado").equals("true")) { %>
-                                alert("Medio de pago eliminado correctamente");
+        alert("Medio de pago eliminado correctamente");
         <% } else if (request.getParameter("eliminado") != null && request.getParameter("eliminado").equals("false")) { %>
-                                alert("No se pudo eliminar el Medio de pago");
+        alert("No se pudo eliminar el Medio de pago");
         <% }%>
 
         <% if (request.getParameter("actualizado") != null && request.getParameter("actualizado").equals("true")) { %>
-                                alert("Medio de pago editado correctamente");
+        alert("Medio de pago editado correctamente");
         <% } else if (request.getParameter("actualizado") != null && request.getParameter("actualizado").equals("false")) { %>
-                                alert("No se pudo editar el Medio de pago");
+        alert("No se pudo editar el Medio de pago");
         <% }%>
 
         <% if (request.getParameter("creado") != null && request.getParameter("creado").equals("true")) { %>
-                                alert("Medio de pago creado correctamente");
+        alert("Medio de pago creado correctamente");
         <% } else if (request.getParameter("creado") != null && request.getParameter("creado").equals("false")) { %>
-                                alert("No se pudo crear el Medio de pago");
+        alert("No se pudo crear el Medio de pago");
         <% }%>
     </script>
 
 </html>
 
-<% } %>
+<% }%>

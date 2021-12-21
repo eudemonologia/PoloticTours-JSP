@@ -5,12 +5,12 @@
 <%@page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% HttpSession miSesion = request.getSession();
-                            if (miSesion.getAttribute("usuario") == null) {
-                                response.sendRedirect("login.jsp");
-                            } else {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Date ahora = new Date();
-    List<Empleado> listaEmpleados = (List) request.getSession().getAttribute("listaEmpleados");
+    if (miSesion.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+    } else {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date ahora = new Date();
+        List<Empleado> listaEmpleados = (List) request.getSession().getAttribute("listaEmpleados");
 %>
 <!DOCTYPE html>
 <html>
@@ -46,11 +46,11 @@
                             <h3>Nuevos<br>Empleados</h3>
                             <h4>
                                 <% int nuevosEmpleados = 0;
-                                                                    for (Empleado empleado : listaEmpleados) {
-                                                                        if (empleado.getFechaContratacion().getMonth() == ahora.getMonth() && empleado.getFechaContratacion().getYear() == ahora.getYear()) {
-                                                                            nuevosEmpleados++;
-                                                                        }
-                                                                    }%>
+                                    for (Empleado empleado : listaEmpleados) {
+                                        if (empleado.getFechaContratacion().getMonth() == ahora.getMonth() && empleado.getFechaContratacion().getYear() == ahora.getYear()) {
+                                            nuevosEmpleados++;
+                                        }
+                                    }%>
                                 <%= nuevosEmpleados%>
                             </h4>
                         </div>
@@ -64,9 +64,9 @@
                             <h3>Salarios<br>Totales</h3>
                             <h4>
                                 <% double salariosTotales = 0;
-                                                                    for (Empleado empleado : listaEmpleados) {
-                                                                        salariosTotales += empleado.getSueldo();
-                                                                    }%>
+                                    for (Empleado empleado : listaEmpleados) {
+                                        salariosTotales += empleado.getSueldo();
+                                    }%>
                                 $<%= String.format("%.2f", salariosTotales)%>
                             </h4>
                         </div>
@@ -162,18 +162,18 @@
     </body>
     <script>
         <% if (request.getParameter("eliminado") != null && request.getParameter("eliminado").equals("true")) { %>
-                                    alert("Empleado eliminado correctamente");
+        alert("Empleado eliminado correctamente");
         <% } else if (request.getParameter("eliminado") != null && request.getParameter("eliminado").equals("false")) { %>
-                                    alert("No se pudo eliminar el empleado");
+        alert("No se pudo eliminar el empleado");
         <% }%>
 
         <% if (request.getParameter("actualizado") != null && request.getParameter("actualizado").equals("true")) { %>
-                                    alert("Empleado editado correctamente");
+        alert("Empleado editado correctamente");
         <% } else if (request.getParameter("actualizado") != null && request.getParameter("actualizado").equals("false")) { %>
-                                    alert("No se pudo editar el empleado");
+        alert("No se pudo editar el empleado");
         <% }%>
     </script>
 
 </html>
 
-<% } %>
+<% }%>
