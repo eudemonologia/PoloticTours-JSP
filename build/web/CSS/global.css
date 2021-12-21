@@ -1,0 +1,184 @@
+main {
+  margin-top: 1rem;
+}
+
+main h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section {
+  margin-top: 1rem;
+}
+
+section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.card {
+  background-color: var(--color-white);
+  border-radius: 2rem;
+  padding: 1.8rem;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: none;
+}
+
+.error {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--border-radius-2);
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.border-card {
+  border: 4px dashed var(--color-primary);
+  border-radius: 2rem;
+  padding: 1.8rem;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+  color: var(--color-primary);
+}
+
+.border-card:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+:is(.border-card) a:hover,
+span:hover {
+  color: var(--color-secondary);
+}
+
+.profile {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: var(--color-primary);
+  margin: 0;
+  padding: 0;
+}
+
+.profile img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile p {
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  font-size: 2rem;
+  font-family: "Baloo Bhaijaan 2", cursive;
+  color: var(--color-primary);
+}
+
+.logo span {
+  color: var(--color-secondary);
+}
+
+.insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  row-gap: 0rem;
+}
+
+.insights > div {
+  margin-top: 1rem;
+  min-width: fit-content;
+}
+
+.insights > a {
+  margin-top: 1rem;
+  min-width: fit-content;
+}
+
+.insights > a * {
+  margin: 0;
+  padding: 0;
+}
+
+.insights > div * {
+  margin: 0;
+  padding: 0;
+}
+
+.insights > a span {
+  font-size: 40px;
+}
+
+.insights > div span {
+  background-color: var(--color-primary);
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 1.5rem;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+}
+
+.data h4 {
+  font-size: 2rem;
+  color: var(--color-success);
+}
+
+.lista {
+  width: 100%;
+  text-align: center;
+}
+
+.lista th {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+
+.lista td {
+  padding: 0.4rem;
+  box-sizing: border-box;
+}
+
+.lista + a {
+  text-align: center;
+  display: block;
+  margin: 1rem auto;
+}
+
+.lista form {
+  display: inline-block;
+}
+
+.lista button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--color-secondary);
+}

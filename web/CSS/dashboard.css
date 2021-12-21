@@ -1,0 +1,9 @@
+.data {
+  display: flex;
+  flex-direction: column;
+}
+
+.data h4 {
+  font-size: 2rem;
+  color: var(--color-success);
+}

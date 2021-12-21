@@ -1,0 +1,72 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  grid-column: 1 / -1;
+}
+
+.form button span {
+  margin-right: 1rem;
+}
+
+.form small {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.field input {
+  width: 100%;
+  height: 3rem;
+  background-color: var(--color-light);
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  transition: all 300ms ease;
+  box-sizing: border-box;
+}
+
+.field select {
+  width: 100%;
+  height: 3rem;
+  background-color: var(--color-light);
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  transition: all 300ms ease;
+  box-sizing: border-box;
+}

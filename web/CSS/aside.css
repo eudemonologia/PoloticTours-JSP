@@ -1,0 +1,71 @@
+aside header {
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+  margin-top: 20px;
+}
+
+aside header button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+aside header figure {
+  display: flex;
+  gap: 1.5rem;
+  text-align: right;
+}
+
+aside header figure div > * {
+  margin: 0;
+  padding: 0;
+}
+
+aside .profile-photo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+aside .notifications ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 75vh;
+  overflow-y: scroll;
+  padding-bottom: 2rem;
+}
+
+aside .notifications ul::-webkit-scrollbar {
+  display: none;
+}
+
+aside .notifications ul li:last-child a {
+  justify-content: center;
+}
+
+aside .notification {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: var(--color-primary);
+  border-radius: 1rem;
+}
+
+aside .notification:hover {
+  color: var(--color-secondary);
+}
+
+aside .notification h4 {
+  margin: 0;
+}
+
+aside .notification small {
+  margin-left: auto;
+}
