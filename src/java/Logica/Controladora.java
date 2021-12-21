@@ -190,25 +190,5 @@ public class Controladora {
         return controlPersis.traerServicio(id);
     }
 
-    public boolean crearServicio(String nombre, String descripcionBreve, String destino, double costo, Date fecha) {
-        Servicio servi = new Servicio ();
-        Paquete paque = new Paquete();
-        
-        servi.setNombre(nombre);
-        servi.setDestino(destino);
-        servi.setCosto(costo);
-        servi.setDescripcionBreve(descripcionBreve);
-        servi.setFecha(fecha);
-        
-        paque.setNombre(nombre+" (SOLO)");
-        paque.setDescuento(0);
-        
-        List <Servicio> serviUnico = new ArrayList <>(servi);
-        List <Paquete> paqueUnico = new ArrayList <>(paque);
-        
-        paque.setListaServicios(serviUnico);
-        servi.setListaPaquetes(paqueUnico);
-        
-        return controlPersis.crearServicio(servi, paque);
-    }
+
 }

@@ -45,13 +45,6 @@ public class SvServicio extends HttpServlet {
             
             Date fecha = format.parse(request.getParameter("fecha"));
             
-            boolean creado = control.crearServicio(nombre, descripcionBreve, destino, costo, fecha);
-            
-            if (creado) {
-                response.sendRedirect("servicios.jsp?creado=true");
-            } else {
-                response.sendRedirect("servicios.jsp?creado=false");
-            }
             
         } catch (ParseException ex) {
             Logger.getLogger(SvServicio.class.getName()).log(Level.SEVERE, null, ex);

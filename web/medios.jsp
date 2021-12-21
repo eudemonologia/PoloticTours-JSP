@@ -5,9 +5,8 @@
 <% HttpSession miSesion = request.getSession();
                         if (miSesion.getAttribute("usuario") == null) {
                             response.sendRedirect("login.jsp");
-                        } %>
-
-<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        } else {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     List<MedioPago> listaMedios = (List) request.getSession().getAttribute("listaMedios");
 %>
 
@@ -162,3 +161,5 @@
     </script>
 
 </html>
+
+<% } %>
