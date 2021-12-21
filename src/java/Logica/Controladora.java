@@ -105,4 +105,30 @@ public class Controladora {
     public List <MedioPago> traerMedios(){
         return controlPersis.traerMedios();
     }
+
+    public boolean updateEmpleado(int id, String nombre, String apellido, String dni, String email, String celular, String direccion, String nacionalidad, Date fechaNac, Date fechaContratacion, String cargo, double sueldo, String password) {
+        Empleado emple = controlPersis.traerEmpleado(id);
+        Usuario usu = emple.getUsuario();
+        
+        
+        
+        emple.setNombre(nombre);
+        emple.setApellido(apellido);
+        emple.setDni(dni);
+        emple.setEmail(email);
+        emple.setCelular(celular);
+        emple.setDireccion(direccion);
+        emple.setNacionalidad(nacionalidad);
+        emple.setFechaNac(fechaNac);
+        
+        emple.setFechaContratacion(fechaContratacion);
+        emple.setCargo(cargo);
+        emple.setSueldo(sueldo);
+        
+        usu.setUsuario(email);
+        usu.setPassword(password);
+        
+        boolean actualizado = true;
+        return actualizado;
+    }
 }
