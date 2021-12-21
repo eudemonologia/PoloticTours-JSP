@@ -128,7 +128,7 @@ public class Controladora {
         usu.setUsuario(email);
         usu.setPassword(password);
         
-        boolean actualizado = true;
+        boolean actualizado = controlPersis.updateEmpleado(emple, usu);
         return actualizado;
     }
 }

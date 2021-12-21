@@ -6,6 +6,8 @@ import Logica.MedioPago;
 import Logica.Usuario;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControladoraPersistencia {
     EmpleadoJpaController empleJPA = new EmpleadoJpaController();
@@ -55,6 +57,18 @@ public class ControladoraPersistencia {
 
     public List<MedioPago> traerMedios() {
         return medioJPA.findMedioPagoEntities();
+    }
+
+    public boolean updateEmpleado(Empleado emple, Usuario usu) {
+        try {
+            usuJPA.edit(usu);
+            empleJPA.edit(emple);
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return false;
+        }
     }
     
 }

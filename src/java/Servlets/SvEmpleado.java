@@ -67,7 +67,7 @@ public class SvEmpleado extends HttpServlet {
 
                 String password = request.getParameter("password");
                 
-                boolean actualizado =
+                boolean actualizado = control.updateEmpleado(id, nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac, fechaContratacion, cargo, sueldo, password);
                 
                 if (actualizado) {
                     response.sendRedirect("empleados.jsp?actualizado=true");

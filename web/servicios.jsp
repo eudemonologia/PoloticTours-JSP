@@ -49,7 +49,7 @@
                         </div>
                         <small>Las últimos 30 días.</small>
                     </div>
-                    <a class="border-card" href="nuevo-empleado.html">
+                    <a class="border-card" href="servicio.jsp">
                         <span class="material-icons-sharp">
                             add
                         </span>
