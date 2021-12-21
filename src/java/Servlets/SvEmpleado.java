@@ -33,11 +33,11 @@ public class SvEmpleado extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action.equals("DELETE")){
+        if (action.equals("DELETE")) {
             try {
                 int id = Integer.parseInt(request.getParameter("id"));
                 boolean eliminado = control.eliminarEmpleado(id);
-                if (eliminado){
+                if (eliminado) {
                     response.sendRedirect("empleados.jsp?eliminado=true");
                 } else {
                     response.sendRedirect("empleados.jsp?eliminado=false");
@@ -45,36 +45,67 @@ public class SvEmpleado extends HttpServlet {
             } catch (NonexistentEntityException ex) {
                 Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else{
-        try {
-            processRequest(request, response);
-            
-            String nombre = request.getParameter("name");
-            String apellido = request.getParameter("lastname");
-            String dni = request.getParameter("dni");
-            String email = request.getParameter("email");
-            String celular = request.getParameter("phone");
-            String direccion = request.getParameter("address");
-            String nacionalidad = request.getParameter("nationality");
-            
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            
-            
-            Date fechaNac = format.parse(request.getParameter("birthdate"));
+        } else if (action.equals("UPDATE")) {
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                String nombre = request.getParameter("name");
+                String apellido = request.getParameter("lastname");
+                String dni = request.getParameter("dni");
+                String email = request.getParameter("email");
+                String celular = request.getParameter("phone");
+                String direccion = request.getParameter("address");
+                String nacionalidad = request.getParameter("nationality");
 
-            Date fechaContratacion = format.parse(request.getParameter("admissiondate"));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date fechaNac = format.parse(request.getParameter("birthdate"));
+
+                Date fechaContratacion = format.parse(request.getParameter("admissiondate"));
+
+                String cargo = request.getParameter("position");
+                double sueldo = Double.parseDouble(request.getParameter("salary"));
+
+                String password = request.getParameter("password");
+                
+                boolean actualizado =
+                
+                if (actualizado) {
+                    response.sendRedirect("empleados.jsp?actualizado=true");
+                } else {
+                    response.sendRedirect("empleados.jsp?actualizado=false");
+                }
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
-            
-            String cargo = request.getParameter("position");
-            double sueldo = Double.parseDouble(request.getParameter("salary"));
-            
-            String password = request.getParameter("password");
-            
-            control.crearEmpleado(nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac, fechaContratacion, cargo, sueldo, password);
-            response.sendRedirect("empleados.jsp");
-        } catch (ParseException ex) {
-            Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } else {
+            try {
+
+                String nombre = request.getParameter("name");
+                String apellido = request.getParameter("lastname");
+                String dni = request.getParameter("dni");
+                String email = request.getParameter("email");
+                String celular = request.getParameter("phone");
+                String direccion = request.getParameter("address");
+                String nacionalidad = request.getParameter("nationality");
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date fechaNac = format.parse(request.getParameter("birthdate"));
+
+                Date fechaContratacion = format.parse(request.getParameter("admissiondate"));
+
+                String cargo = request.getParameter("position");
+                double sueldo = Double.parseDouble(request.getParameter("salary"));
+
+                String password = request.getParameter("password");
+
+                control.crearEmpleado(nombre, apellido, dni, email, celular, direccion, nacionalidad, fechaNac, fechaContratacion, cargo, sueldo, password);
+                response.sendRedirect("empleados.jsp");
+            } catch (ParseException ex) {
+                Logger.getLogger(SvEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

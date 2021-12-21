@@ -24,7 +24,7 @@
                                                             <% } else { %> Nuevo Empleado <% } %>
                                             </h2>
                                             <section class="card">
-                                                <form class="form" action="SvEmpleado" method="POST">
+                                                <form class="form colums2" action="SvEmpleado" method="POST">
                                                     <div class="field">
                                                         <label for="name">Nombre</label>
                                                         <input type="text" name="name" id="name" <% if (id !=null) {%> value="<%=emple.getNombre()%>" <% } %> required>

@@ -17,7 +17,7 @@
 
     <head>
         <%@include file="./COMPONENTS/Head.jsp" %>
-        <link rel="stylesheet" href="./CSS/empleados.css">
+        <link rel="stylesheet" href="./CSS/clientes.css">
     </head>
 
     <body>
@@ -31,7 +31,7 @@
                     <% } else { %> Empleados <% } %>
                 </h2>
                 <section class="card">
-                    <form class="form" action="SvCliente" method="POST" >
+                    <form class="form colums2" action="SvCliente" method="POST" >
                         <div class="field">
                             <label for="name">Nombre</label>
                             <input type="text" name="name" id="name" <% if (id != null) {%> value="<%=cliente.getNombre()%>" <% } %> required>
